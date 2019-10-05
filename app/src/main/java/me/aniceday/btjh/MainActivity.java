@@ -13,25 +13,22 @@ import java.io.DataOutputStream;
 //import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity {
-    private String[] d = {"export CLASSPATH=/data/local/tmp/.knife/inject.jar\n", "export ANDROID_DATA=/data/local/tmp/.knife\n", "exec app_process /data/local/tmp/.knife com.coffee.injectmotionevent.main.InjectMotionEvent 0 200 300 &\n","export LD_LIBRARY_PATH=/vendor/lib:/system/lib\n"};
-    private void a(String paramString)
-    {
-        try{
+    private String[] d = {"export CLASSPATH=/data/local/tmp/.knife/inject.jar\n","exec app_process /data/local/tmp/.knife com.coffee.injectmotionevent.main.InjectMotionEvent 0 200 300 &\n","exec /data/local/tmp/knife_server &\n"};
+
+    private void a(String paramString) {
+        try {
             Process localProcess = Runtime.getRuntime().exec(paramString);
             DataOutputStream param = new DataOutputStream(localProcess.getOutputStream());
-            for(int i =0;i<d.length;i++)
-                {
-                    param.writeBytes(d[i].toString());
-                }
-            param.writeBytes("export LD_LIBRARY_PATH=/vendor/lib:/system/lib\n");
-            param.writeBytes("exit\n");
+            for (int i = 0; i < d.length; i++) {
+                param.writeBytes(d[i].toString());
+            }
             param.flush();
             localProcess.waitFor();
-        }
-        catch(Exception p) {
+        } catch (Exception p) {
             p.printStackTrace();
-            }
+        }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,4 +1,4 @@
-package me.aniceday.btjh;
+package me.ioiu.btjh;
 
 import org.junit.Test;
 

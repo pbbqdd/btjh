@@ -82,91 +82,32 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
         buttenStats(check_server(),fab);
 
-
-        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            public void onClick(View view) {
+                switch (check_server().toString()){
+                    case "false":
+                        fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("red")));
+                        fab.setImageResource(android.R.drawable.ic_media_pause);
+                        cmd("su",d);
+                        break;
+                    case "true":
+                        fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(android.R.color.holo_blue_light)));
+                        fab.setImageResource(android.R.drawable.ic_media_play);
+                        cmd("su",s);
+
+                }
+
+
             }
         });
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-        mAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                fab.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        switch (check_server().toString()){
-                            case "false":
-                                fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("red")));
-                                fab.setImageResource(android.R.drawable.ic_media_pause);
-                                cmd("su",d);
-                                break;
-                            case "true":
-                                fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(android.R.color.holo_blue_light)));
-                                fab.setImageResource(android.R.drawable.ic_media_play);
-                                cmd("su",s);
-
-                        }
-
-
-                    }
-                });
                 // Code to be executed when an ad finishes loading.
 //
 
 
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                // Code to be executed when an ad request fails.
-//                fab.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        switch (check_server().toString()){
-//                            case "false":
-//                                fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("red")));
-//                                fab.setImageResource(android.R.drawable.ic_media_pause);
-//                                cmd("su",d);
-//                                break;
-//                            case "true":
-//                                fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(android.R.color.holo_blue_light)));
-//                                fab.setImageResource(android.R.drawable.ic_media_play);
-//                                cmd("su",s);
-//
-//                        }
-//
-//
-//                    }
-//                });
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-            @Override
-            public void onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                // Code to be executed when the user has left the app.
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
-        });
-
     }
+
+
     @Override
     protected void onStart(){
         super.onStart();

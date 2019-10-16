@@ -1,24 +1,27 @@
-package me.ioiu.btjh;
+package me.aniceday.btjh;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
+import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.View;
-
+import android.widget.TextView;
 import com.google.android.gms.ads.AdRequest;
-
+import com.google.android.gms.ads.AdView;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 //import android.view.Menu;
 

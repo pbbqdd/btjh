@@ -1,83 +1,31 @@
 package me.ioiu.btjh;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
+
 import android.os.Bundle;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.view.View;
+import me.ioiu.btjh.BattenStatus;
+
 import com.google.android.gms.ads.AdRequest;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 //import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity {
     private AdView mAdView;
-    private String[] d = {"export CLASSPATH=/data/local/tmp/.knife/inject.jar\n","exec app_process /data/local/tmp/.knife com.coffee.injectmotionevent.main.InjectMotionEvent 0 200 300 &\n","exec /data/local/tmp/knife_server &\n"};
-    private String[] s = {"kill -9 $(pidof com.zuoyou.inject)\n","kill -9 $(pidof knife_server)\n"};
-    private void cmd(String paramString, String[] cmdString) {
-        try {
-            Process localProcess = Runtime.getRuntime().exec(paramString);
-            DataOutputStream param = new DataOutputStream(localProcess.getOutputStream());
-            BufferedReader in = new BufferedReader(new InputStreamReader(localProcess.getInputStream()));
-            for (int i = 0; i < cmdString.length; i++) {
-                param.writeBytes(cmdString[i].toString());
-            }
-            param.flush();
-//            localProcess.waitFor();
-
-        } catch (Exception p) {
-            p.printStackTrace();
-        }
-    }
-
-
-
-    public Boolean check_server() {
-        try {
-            Process localProcess = Runtime.getRuntime().exec("su -c pidof com.zuoyou.inject");
-            BufferedReader in = new BufferedReader(new InputStreamReader(localProcess.getInputStream()));
-            String s;
-            if(in.readLine()==null){
-                return false;
-            }else{
-                return true;
-            }
-
-
-
-        } catch (Exception p) {
-            p.printStackTrace();
-            return false;
-        }
-    }
-    private void buttenStats(Boolean s,FloatingActionButton fab){
-        if(s){
-            fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("red")));
-            fab.setImageResource(android.R.drawable.ic_media_pause);
-
-
-        }else {
-            fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(android.R.color.holo_blue_light)));
-            fab.setImageResource(android.R.drawable.ic_media_play);
-        }
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        buttenStats(check_server(),fab);
-
-
+        BattenStatus fab = findViewById(R.id.fab);
+        fab.checkbattenStatus(Beitong.check_server());
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -90,20 +38,13 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (check_server().toString()){
-                    case "false":
-                        fab.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("red")));
-                        fab.setImageResource(android.R.drawable.ic_media_pause);
-                        cmd("su",d);
-                        break;
-                    case "true":
-                        fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(android.R.color.holo_blue_light)));
-                        fab.setImageResource(android.R.drawable.ic_media_play);
-                        cmd("su",s);
-
+                if(Beitong.check_server()){
+                    fab.battenStatus("play");
+                    new Beitong().butten(false);
+                }else {
+                    fab.battenStatus("pause");
+                    new Beitong().butten(true);
                 }
-
-
             }
         });
 

@@ -13,7 +13,7 @@
         android:id="@+id/showtext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="点击右下角激活/反激活"
+        android:text="@string/strings"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

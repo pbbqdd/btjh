@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">手柄激活器</string>
-    <string name="strings">点击右下角激活/反激活</string>
+    <string name="text_view">点击右下角激活/反激活</string>
 </resources>

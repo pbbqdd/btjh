@@ -9,7 +9,7 @@ class Beitong {
     private static String[] d = {"export CLASSPATH=/data/local/tmp/.knife/inject.jar\n","exec app_process /data/local/tmp/.knife com.coffee.injectmotionevent.main.InjectMotionEvent 0 200 300 &\n" ,"exec /data/local/tmp/knife_server &\n"};
     private static String[] s = {"kill -9 $(pidof com.zuoyou.inject)\n","kill -9 $(pidof knife_server)\n"};
 
-    private static boolean flag;
+
     private void cmd(String paramString, String[] cmdString) {
         try {
             Process localProcess = Runtime.getRuntime().exec(paramString);
@@ -33,7 +33,7 @@ class Beitong {
             BufferedReader in = new BufferedReader(new InputStreamReader(localProcess.getInputStream()));
             if (in.readLine() == null) {
 
-                flag = false;
+
                 return PlayAndPause.PAUSE;
 
             } else {
@@ -41,7 +41,7 @@ class Beitong {
 //                while ((thisline =in.readLine())!= null){
 //                    Log.d("print",in.readLine());
 //                }
-                flag = true;
+
                 return PlayAndPause.PLAY;
 //                Log.d("print","dsjfksl"+String.valueOf(in.readLine()));
 

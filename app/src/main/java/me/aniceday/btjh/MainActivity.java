@@ -13,7 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-import me.aniceday.btjh.R;
+
 
 import com.google.android.gms.ads.AdRequest;
 //import android.view.Menu;

@@ -23,6 +23,9 @@ public class BattenStatus extends FloatingActionButton{
         super(context,attrs,defStyleAttr);
     }
 
+    /**
+     * @param b
+     */
     public void checkbattenStatus(boolean b){//运行中显示暂停按钮，非运行显示play；
         if(b){
             this.battenStatus("pause");

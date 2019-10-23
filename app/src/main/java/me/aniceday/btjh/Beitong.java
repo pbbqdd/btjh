@@ -1,5 +1,7 @@
 package me.aniceday.btjh;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -9,10 +11,12 @@ class Beitong {
     private static String[] d = {"export CLASSPATH=/data/local/tmp/.knife/inject.jar\n","exec app_process /data/local/tmp/.knife com.coffee.injectmotionevent.main.InjectMotionEvent 0 200 300 &\n" ,"exec /data/local/tmp/knife_server &\n"};
     private static String[] s = {"kill -9 $(pidof com.zuoyou.inject)\n","kill -9 $(pidof knife_server)\n"};
 
+    private Process localProcess;
+
 
     private void cmd(String paramString, String[] cmdString) {
         try {
-            Process localProcess = Runtime.getRuntime().exec(paramString);
+            localProcess = Runtime.getRuntime().exec(paramString);
             DataOutputStream param = new DataOutputStream(localProcess.getOutputStream());
             BufferedReader in = new BufferedReader(new InputStreamReader(localProcess.getInputStream()));
             for (String i:cmdString) {
@@ -25,6 +29,10 @@ class Beitong {
         } catch (Exception p) {
             p.printStackTrace();
         }
+    }
+
+    public Process getLocalProcess() {
+        return localProcess;
     }
 
     protected static PlayAndPause check_server() {//服务检查，如果启动1，非启动0；

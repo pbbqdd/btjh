@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 //import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity  {
@@ -49,20 +50,23 @@ public class MainActivity extends AppCompatActivity  {
 
 
         fab.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view){
 //                Log.d("print",serverFlag.toString());
                 if (!serverFlag.isaBoolean()) {//运行中需要关掉
 //                    textView.setText(fab.battenStatus("play"));
                     setText("服务待激活");
+
+//                    fab.setVisibility(View.INVISIBLE);
                     new Beitong().butten(serverFlag.isaBoolean());
                     try {
 
-                        Thread.currentThread().sleep(5000);
+                        Thread.currentThread();
+                        Thread.sleep(2000);
                     }catch (Exception e){
                         e.printStackTrace();
                     }
-
                     serverFlag =Beitong.check_server();
                     if(serverFlag.isaBoolean()){
                         setText("激活服务成功");
@@ -75,7 +79,8 @@ public class MainActivity extends AppCompatActivity  {
                     new Beitong().butten(serverFlag.isaBoolean());
                     try {
 
-                        Thread.currentThread().sleep(5000);
+                        Thread.currentThread();
+                        Thread.sleep(2000);
                     }catch (Exception e){
                         e.printStackTrace();
                     }

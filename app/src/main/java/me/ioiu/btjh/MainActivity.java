@@ -9,23 +9,38 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
+import me.ioiu.btjh.PlayAndPause;
+
 import me.ioiu.btjh.BattenStatus;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 //import android.view.Menu;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
     private AdView mAdView;
+    public int text= R.string.text_view;
+    private  TextView textView;
+    private  static PlayAndPause serverFlag = PlayAndPause.PAUSE;
+
+    protected void setText(String text){
+        textView.setText(text);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        textView = findViewById(R.id.showtext);
         setSupportActionBar(toolbar);
         BattenStatus fab = findViewById(R.id.fab);
-        fab.checkbattenStatus(Beitong.check_server());
+        serverFlag=Beitong.check_server();
+        fab.checkbattenStatus(serverFlag.isaBoolean());//初始化检查
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
@@ -35,15 +50,46 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
+
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if(Beitong.check_server()){
-                    fab.battenStatus("play");
-                    new Beitong().butten(false);
-                }else {
-                    fab.battenStatus("pause");
-                    new Beitong().butten(true);
+            public void onClick(View view){
+//                Log.d("print",serverFlag.toString());
+                if (!serverFlag.isaBoolean()) {//运行中需要关掉
+//                    textView.setText(fab.battenStatus("play"));
+                    setText("服务待激活");
+                    new Beitong().butten(serverFlag.isaBoolean());
+                    try {
+
+                        Thread.currentThread().sleep(5000);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+
+                    serverFlag =Beitong.check_server();
+                    if(serverFlag.isaBoolean()){
+                        setText("激活服务成功");
+                        fab.battenStatus(PlayAndPause.PAUSE.getType());
+                    }else {
+                        setText("激活服务失败，请使用电脑端先激活一次");
+                    }
+                } else {
+//                    textView.setText(fab.battenStatus("pause"));
+                    new Beitong().butten(serverFlag.isaBoolean());
+                    try {
+
+                        Thread.currentThread().sleep(5000);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                    serverFlag =Beitong.check_server();
+                    if(serverFlag.isaBoolean()){
+                        setText("关闭服务失败");
+                    }else {
+                        setText("关闭服务成功");
+                        fab.battenStatus(PlayAndPause.PLAY.getType());
+                    }
                 }
             }
         });
@@ -54,4 +100,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
 
     }
+
+
 }

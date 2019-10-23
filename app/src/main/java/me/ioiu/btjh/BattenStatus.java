@@ -23,7 +23,7 @@ public class BattenStatus extends FloatingActionButton{
         super(context,attrs,defStyleAttr);
     }
 
-    public void checkbattenStatus(boolean b){
+    public void checkbattenStatus(boolean b){//运行中显示暂停按钮，非运行显示play；
         if(b){
             this.battenStatus("pause");
         }else {
@@ -35,10 +35,15 @@ public class BattenStatus extends FloatingActionButton{
             case "pause":
                 this.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("red")));
                 this.setImageResource(android.R.drawable.ic_media_pause);
+//                return R.string.activity;
                 break;
             case "play":
                 this.setBackgroundTintList(ColorStateList.valueOf(Resources.getSystem().getColor(android.R.color.holo_blue_light)));
                 this.setImageResource(android.R.drawable.ic_media_play);
+//                return R.string.inactivity;
+                break;
+            default:
+//                return R.string.text_view;
                 break;
         }
     }

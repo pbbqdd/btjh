@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
         mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("217993F7A7FD7183FA7A2D39E0C4F3D3").build();
         mAdView.loadAd(adRequest);
 
 

@@ -1,6 +1,4 @@
-package me.ioiu.btjh;
-
-import android.util.Log;
+package me.aniceday.btjh;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

@@ -1,4 +1,4 @@
-package me.ioiu.btjh;
+package me.aniceday.btjh;
 
 
 import android.os.Bundle;
@@ -10,16 +10,12 @@ import com.google.android.gms.ads.initialization.OnInitializationCompleteListene
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import me.ioiu.btjh.PlayAndPause;
 
-import me.ioiu.btjh.BattenStatus;
+import me.aniceday.btjh.R;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 //import android.view.Menu;
 
 public class MainActivity extends AppCompatActivity  {

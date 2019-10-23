@@ -1,4 +1,4 @@
-package me.ioiu.btjh;
+package me.aniceday.btjh;
 
 import android.content.Context;
 import androidx.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("me.ioiu.btjh", appContext.getPackageName());
+        assertEquals("me.aniceday.btjh", appContext.getPackageName());
     }
 }

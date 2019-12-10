@@ -7,3 +7,5 @@
 支持开启和关闭服务。
 [Google Play 下载](https://play.google.com/store/apps/details?id=me.aniceday.btjh)
 
+功能不算完美，如果我的贡献对您有用感谢支持。  
+![donate](https://github.com/pbbqdd/zxfbtbutton/raw/master/wechatalipay.png)
